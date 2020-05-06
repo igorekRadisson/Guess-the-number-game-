@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="main">
+	<p id="message"></p>
+	<input type="text" id="input">
+	<button id="restart" disabled>Restart game</button>
+</div>
+
+<style>
+	#main {
+		text-align: center;
+	}
+	#input {
+		height: 50px;
+		border-radius: 5px;
+	}
+</style>
+
+<script>
+	let message = document.querySelector('#message');
+	let restart = document.querySelector('#restart');
+	let input = document.querySelector('#input');
+
+	let compNumber = getRandomInt(1,10);
+
+	input.addEventListener('blur', function() {
+		let userNumber = input.value;
+		if (userNumber == compNumber) {
+			message.innerHTML = 'You Win!!!';
+			restart.disabled = false;
+		} else if (userNumber > compNumber) {
+			message.innerHTML = 'Need less < number)';
+		} else {
+			message.innerHTML = 'Need more > number)';
+		}
+	});
+
+	restart.addEventListener('click', function() {
+		compNumber = getRandomInt(1,10);
+		input.value = '';
+		message.innerHTML = '';
+		restart.disabled = true;
+	});
+
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min - 1)) + min;
+	}	
+</script>
+</body>
+</html>
